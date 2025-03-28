@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 50px;
+        }
+
+        form {
+            width: 300px;
+            margin: auto;
+            display: flex;
+            flex-direction: column;
+        }
+
+        input {
+            margin: 10px 0;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: blue;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: darkblue;
+        }
+
+        #errorMessage {
+            color: red;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Interactive Form with JavaScript</h1>
+
+    <!-- Dynamic Greeting -->
+    <p id="greeting">Hello, User!</p>
+
+    <!-- Form -->
+    <form id="myForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" placeholder="Enter your name">
+        
+        <label for="email">Email:</label>
+        <input type="email" id="email" placeholder="Enter your email">
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" placeholder="Enter your password">
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p id="errorMessage"></p>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let form = document.getElementById("myForm");
+            let errorMessage = document.getElementById("errorMessage");
+            let greeting = document.getElementById("greeting");
+
+            // Dynamic Greeting Based on Time
+            let hour = new Date().getHours();
+            if (hour < 12) {
+                greeting.textContent = "Good Morning!";
+            } else if (hour < 18) {
+                greeting.textContent = "Good Afternoon!";
+            } else {
+                greeting.textContent = "Good Evening!";
+            }
+
+            // Form Validation on Submit
+            form.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent form submission
+
+                let name = document.getElementById("name").value.trim();
+                let email = document.getElementById("email").value.trim();
+                let password = document.getElementById("password").value.trim();
+
+                if (name === "" || email === "" || password === "") {
+                    errorMessage.textContent = "All fields are required!";
+                } else if (!email.includes("@")) {
+                    errorMessage.textContent = "Enter a valid email!";
+                } else {
+                    errorMessage.textContent = "Form Submitted Successfully!";
+                    errorMessage.style.color = "green";
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
